@@ -1,0 +1,14 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+### Get a list of jobs
+
+GET http://localhost:1337/jobs
+
+### Adding a Job
+POST http://localhost:1337/jobs
+Content-Type: application/json
+
+{
+  "title": "IT Manager",
+  "description": "Manages Stuff"
+}
