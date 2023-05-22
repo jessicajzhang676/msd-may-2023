@@ -1,0 +1,1 @@
+CREATE DATABASE hr_jobs_listings_outbox

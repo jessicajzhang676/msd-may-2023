@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-dotnettools.csharp",
+        "ms-azuretools.vscode-docker",
+        "pomdtr.excalidraw-editor",
+        "ckolkman.vscode-postgres",
+        "ms-ossdata.vscode-postgresql",
+        "jeppeandersen.vscode-kafka"
+    ]
+}

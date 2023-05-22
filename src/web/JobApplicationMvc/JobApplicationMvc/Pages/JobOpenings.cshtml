@@ -1,0 +1,28 @@
+﻿@page
+@model JobApplicationMvc.Pages.JobOpeningsModel
+@{
+    ViewData["Title"] = "Job Openings";
+}
+
+<section class="container">
+    <h1>Our Current Job Openings</h1>
+    <p>We hope you find one...</p>
+    
+    @foreach(var opening in Model.Openings)
+    {
+        <div class="card">
+            <div class="card-header">
+                @opening.Title
+            </div>
+            <div class="card-body">
+                <p>@opening.Description</p>
+                <p>This is in the @opening.Department department.</p>
+                <p>The salary range for this job is between @opening.SalaryBottomRange.ToString("c") and @opening.SalaryTopRange.ToString("c") depending on qualifications.</p>
+                
+            </div>
+            <div class="card-footer">
+                <a class="card-link" asp-page="jobdetails" asp-route-id="@opening.Id">Apply for this job.</a>
+            </div>
+        </div>
+    }
+</section>

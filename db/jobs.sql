@@ -1,0 +1,2 @@
+CREATE DATABASE hr_jobs
+

@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Get a Job at Company!</h1>
+
+    @if (Model.Openings.Count == 0)
+    {
+        <div class="alert alert-info">
+            <h3>Sorry - No Current Openings!</h3>
+            <p>Check back soon!</p>
+        </div>
+    }
+    else
+    {
+        <h3>Latest Job Openings</h3>
+        @foreach (var opening in Model.Openings)
+        {
+            <div class="alert alert-success">
+                <h4>@opening.Title</h4>
+                <p>@opening.Description</p>
+                <p>Listed on @opening.ListedOn.ToString("d")</p>
+            </div>
+            <a asp-page="JobOpenings" class="btn btn-primary">See the Full List</a>
+        }
+    }
+
+</div>
