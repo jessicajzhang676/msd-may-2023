@@ -4,6 +4,8 @@
 
 GET http://localhost:1337/jobs
 
+//GET http://localhost:1337/jobs/it-manager-a
+
 ### Adding a Job
 POST http://localhost:1337/jobs
 Content-Type: application/json

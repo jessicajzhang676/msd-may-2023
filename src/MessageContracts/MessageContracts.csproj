@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackageOutputPath>C:\Users\ITUStudent\dev\msd-may-2023\nugets</PackageOutputPath>
+  </PropertyGroup>
+
+</Project>

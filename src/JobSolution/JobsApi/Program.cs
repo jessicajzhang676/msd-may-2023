@@ -1,5 +1,6 @@
 using JobsApi.Controllers;
 using SlugGenerators;
+using Marten;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ICheckForUniqueValues, UniqueIdChecker>();
 builder.Services.AddScoped<SlugGenerator>();
 builder.Services.AddScoped<JobManager>();
+
+var dataConnectionString = builder.Configuration.GetConnectionString("data") ?? throw new ArgumentNullException("Need a connection string");
+
+builder.Services.AddMarten(options =>
+{
+    options.Connection(dataConnectionString);
+    // talk more about this later.
+    if (builder.Environment.IsDevelopment())
+    {
+        options.AutoCreateSchemaObjects = Weasel.Core.AutoCreate.All;
+    }
+});
 
 var app = builder.Build();
 

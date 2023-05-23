@@ -1,13 +1,21 @@
-﻿using SlugGenerators;
+﻿using Marten;
+using SlugGenerators;
 
 namespace JobsApi.Controllers;
 
 public class UniqueIdChecker : ICheckForUniqueValues
 
 {
-    public Task<bool> IsUniqueAsync(string attempt)
+    private readonly IDocumentStore _documentStore;
+
+    public UniqueIdChecker(IDocumentStore documentStore)
     {
-        // TODO: check the database, make sure it isn't used...
-        return Task.FromResult(true);
+        _documentStore = documentStore;
+    }
+    public async Task<bool> IsUniqueAsync(string attempt)
+    {
+        var session = _documentStore.LightweightSession();
+        var alreadyThere = await session.Query<JobEntity>().Where(j => j.Slug == attempt).AnyAsync();
+        return !alreadyThere;
     }
 }
