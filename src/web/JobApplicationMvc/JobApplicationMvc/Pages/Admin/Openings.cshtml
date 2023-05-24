@@ -1,0 +1,36 @@
+﻿@page
+@model JobApplicationMvc.Pages.Admin.OpeningsModel
+@{
+}
+
+@if(ViewData["message"] is not null)
+{
+    <div class="alert alert-info">
+        <h4>@ViewData["message"]</h4>
+    </div>
+}
+<form method="post">
+
+    <div class="field-group">
+        <label asp-for="JobOpeningModel.JobId"></label>
+        <select class="form-control" asp-for="JobOpeningModel.JobId">
+            @foreach(var job in Model.Jobs)
+            {
+                <option value="@job.Id">@job.Title</option>
+            }
+        </select>
+    </div>
+    <div class="field-group">
+        <label asp-for="JobOpeningModel.OpeningStartDate"></label>
+        <input class="form-control" asp-for="JobOpeningModel.OpeningStartDate" />
+    </div>
+    <div class="field-group">
+        <label asp-for="JobOpeningModel.MinimumSalary"></label>
+        <input type="number" class="form-control" asp-for="JobOpeningModel.MinimumSalary" />
+    </div>
+    <div class="field-group">
+        <label asp-for="JobOpeningModel.MaximumSalary"></label>
+        <input type="number" class="form-control" asp-for="JobOpeningModel.MaximumSalary" />
+    </div>
+    <button class="btn btn-success" type="submit">Post this Job Opening</button>
+</form>

@@ -9,5 +9,5 @@ services:
     project: ./src/JobListingsSolution/JobListingsApi/JobListingsApi.csproj
     bindings:
       - port: 1338
-  - name: mvc
-    project: ./src/web/JobApplicationMvc/JobApplicationMvc/JobApplicationMvc.csproj
+  # - name: mvc
+  #   project: ./src/web/JobApplicationMvc/JobApplicationMvc/JobApplicationMvc.csproj

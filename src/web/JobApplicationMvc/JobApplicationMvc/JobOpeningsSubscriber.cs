@@ -22,13 +22,12 @@ public class JobOpeningsSubscriber : ICapSubscribe
             Title = jobListingMessage.JobName,
             Department = "Any",
             Description = jobListingMessage.JobId,
-            ListedOn = DateTimeOffset.Now,
+            OpeningId = Guid.Parse(jobListingMessage.Id),
+            ListedOn = new DateTimeOffset(DateTime.Now.ToUniversalTime()),
             SalaryBottomRange = jobListingMessage.SalaryRange.Min,
             SalaryTopRange = jobListingMessage.SalaryRange.Max,
         };
-
         _context.JobOpenings.Add(jobOpening);
-
         await _context.SaveChangesAsync();
     }
 }

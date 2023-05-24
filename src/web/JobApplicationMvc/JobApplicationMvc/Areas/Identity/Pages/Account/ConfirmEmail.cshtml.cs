@@ -12,16 +12,20 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using DotNetCore.CAP;
+using DomainEvents = MessageContracts.WebMessages;
 
 namespace JobApplicationMvc.Areas.Identity.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<JobApplicationMvcUser> _userManager;
+        private readonly ICapPublisher _publisher;
 
-        public ConfirmEmailModel(UserManager<JobApplicationMvcUser> userManager)
+        public ConfirmEmailModel(UserManager<JobApplicationMvcUser> userManager, ICapPublisher publisher)
         {
             _userManager = userManager;
+            _publisher = publisher;
         }
 
         /// <summary>
@@ -48,6 +52,17 @@ namespace JobApplicationMvc.Areas.Identity.Pages.Account
 
             // TODO: Add our code here to produce domain event.
             StatusMessage = result.Succeeded ? "Thank you for confirming your email." : "Error confirming your email.";
+
+            var domainEvents = new DomainEvents.ApplicationCreated
+            {
+                DateOfBirth = user.DateOfBirth,
+                EmailAddress = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                UserId = user.Id,
+            };
+            await _publisher.PublishAsync(DomainEvents.ApplicationCreated.MessageId, domainEvents);
+
             return Page();
         }
     }
