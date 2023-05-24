@@ -1,0 +1,13 @@
+# dotnet tool update -g Microsoft.Tye --version "0.11.0-alpha.22111.1"
+name: msd
+services:
+  - name: jobsapi
+    project: ./src/JobSolution/JobsApi/JobsApi.csproj      
+    bindings:
+      - port: 1337
+  - name: job-listings-api
+    project: ./src/JobListingsSolution/JobListingsApi/JobListingsApi.csproj
+    bindings:
+      - port: 1338
+  - name: mvc
+    project: ./src/web/JobApplicationMvc/JobApplicationMvc/JobApplicationMvc.csproj

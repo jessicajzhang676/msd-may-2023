@@ -15,7 +15,7 @@ services:
   kafka:
     image: "bitnami/kafka:latest"
     volumes:
-      - kafka_data:/app/myapp
+      - kafka_data:/bitnami/kafka
     ports:
       - "9092:9092"
     environment:

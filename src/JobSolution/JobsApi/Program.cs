@@ -16,15 +16,23 @@ builder.Services.AddScoped<SlugGenerator>();
 builder.Services.AddScoped<JobManager>();
 
 var dataConnectionString = builder.Configuration.GetConnectionString("data") ?? throw new ArgumentNullException("Need a connection string");
+var kafkaConnectionString = builder.Configuration.GetConnectionString("kafka") ?? throw new ArgumentNullException("Need a kafka broker");
 
 builder.Services.AddMarten(options =>
 {
     options.Connection(dataConnectionString);
-    // talk more about this later.
-    if (builder.Environment.IsDevelopment())
+    // talk more about this later.
+    if (builder.Environment.IsDevelopment())
     {
         options.AutoCreateSchemaObjects = Weasel.Core.AutoCreate.All;
     }
+});
+
+builder.Services.AddCap(options =>
+{
+    options.UseKafka(kafkaConnectionString);
+    options.UsePostgreSql(dataConnectionString); // it uses an "outbox" pattern
+    options.UseDashboard(); // just for class, but I think it's cool.ï¿½
 });
 
 var app = builder.Build();

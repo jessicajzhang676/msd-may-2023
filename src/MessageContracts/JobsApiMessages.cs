@@ -15,4 +15,3 @@ public record JobRetired
     public static readonly string MessageId = "JobsApi.JobRetired";
     public string Id { get; set; } = "";
 }
-
